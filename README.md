@@ -19,6 +19,7 @@ Offene Punkte:
 - Müssen alle 10 Fragen beantwortet werden? Wenn nein, welche Auswirkungen hat dies auf das Spider-Diagramm.
 - Viele Spider-Diagramme haben 8 Achsen. Da würden sich 8 bzw. 16 Fragen anbieten.
 - Was soll die Aussage des Diagramms sein? Evtl. gäbe es Alternativen zum Spider-Diagramm.
+- Soll zusätzlicher Aufwand für die Optimierung auf mobile Geräte getrieben werden?
 
 Die Antworten werden dann auf eine Skala von 0 bis 100 (oder ähnlich abgebildet) um Sie danach in einem Spiderdiagramm einer Mustergemeinde (die Daten kommen von Curdin Derungs) gegenübergestellt zu werden.
 
