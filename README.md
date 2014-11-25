@@ -17,6 +17,8 @@ Die effektiven Fragen wird Curdin Derungs noch liefern.
 Offene Punkte:
 - Welche Typen von Fragen kommen vor? Ja/Nein-Fragen, Fragen mit einer Auswahl, Fragen nach einer Anzahl, usw.?
 - Müssen alle 10 Fragen beantwortet werden? Wenn nein, welche Auswirkungen hat dies auf das Spider-Diagramm.
+- Viele Spider-Diagramme haben 8 Achsen. Da würden sich 8 bzw. 16 Fragen anbieten.
+- Was soll die Aussage des Diagramms sein? Evtl. gäbe es Alternativen zum Spider-Diagramm.
 
 Die Antworten werden dann auf eine Skala von 0 bis 100 (oder ähnlich abgebildet) um Sie danach in einem Spiderdiagramm einer Mustergemeinde (die Daten kommen von Curdin Derungs) gegenübergestellt zu werden.
 
