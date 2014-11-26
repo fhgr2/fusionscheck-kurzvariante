@@ -33,4 +33,4 @@ JavaScript-basiertes Tool, welches sich ins Typo3 einbinden l√§sst, analog zur √
 Administrativ
 =============
 - Aufwand: 40 h
-- Projekt: 11113 IKT-10-Kleinprojekte aF+E 
+- Projekt: 11437 ZVM-12-Fusionscheck (falls die 40 h aufgebruacht sind, bei mir melden, resp. auf 11113 IKT-10-Kleinprojekte aF+E buchen).
