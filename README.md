@@ -13,8 +13,8 @@ Grundsätzlich soll ein Tool analog zu http://www.htwchur.ch/management/institut
 Es werden 10 Fragen gestellt. 
 Beispiel für eine Frage: Wie viele Einwohner hat ihre Gemeinde?
 Die effektiven Fragen wird Curdin Derungs noch liefern.
+Die Antworten werden dann auf eine Skala von 0 bis 100 (oder ähnlich abgebildet) um Sie danach in einem Spiderdiagramm einer Mustergemeinde (die Daten kommen von Curdin Derungs) gegenübergestellt zu werden.
 
-Die Antworten auf die Fragen habe ich ins Protokoll im Wiki verschoben. Bitte dort nachschauen.
 
 Technisch
 =========
