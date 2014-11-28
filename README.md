@@ -14,12 +14,18 @@ Es werden 10 Fragen gestellt.
 Beispiel für eine Frage: Wie viele Einwohner hat ihre Gemeinde?
 Die effektiven Fragen wird Curdin Derungs noch liefern.
 
-Offene Punkte:
+Diskussion mit Curdin Derungs vom 28.11.2014:
 - Welche Typen von Fragen kommen vor? Ja/Nein-Fragen, Fragen mit einer Auswahl, Fragen nach einer Anzahl, usw.?
+Es handelt sich vorwiegend um Zahlen, als z.B. "Wie viele Einwohner hat die Gemeinde". 
 - Müssen alle 10 Fragen beantwortet werden? Wenn nein, welche Auswirkungen hat dies auf das Spider-Diagramm.
+Folgende Variante wäre zu bevorzugen:
+- Das Spiderdiagramm wird fortlaufend ergänzt. Sobald eine Frage beantwortet wird, wird ein Stützpunkt eingezeichnet. Sobald zwei Stützpunkte nebeneinander vorhanden sind, wird eine Linie gezogen. (Die Fragen werden in derselben Reihenfolge gestellt, wie Sie im Diagramm dargestellt werden.) 
 - Viele Spider-Diagramme haben 8 Achsen. Da würden sich 8 bzw. 16 Fragen anbieten.
+Entscheid: 10 Achsen.
 - Was soll die Aussage des Diagramms sein? Evtl. gäbe es Alternativen zum Spider-Diagramm.
+Entscheid: momentan soll ein Spider-Diagramm genutzt werden.
 - Soll zusätzlicher Aufwand für die Unterstützung von veralteten Browsern getrieben werden? (Siehe z.B. https://www.browser-statistik.de/ und https://www.browser-statistik.de/statistiken/versionen/ )
+Nein. Einigermassen aktuelle Browser sollen unterstützt werden, sicherlich aber nicht IE 6.
 - Soll zusätzlicher Aufwand für die Optimierung auf mobile Geräte getrieben werden?
 
 Die Antworten werden dann auf eine Skala von 0 bis 100 (oder ähnlich abgebildet) um Sie danach in einem Spiderdiagramm einer Mustergemeinde (die Daten kommen von Curdin Derungs) gegenübergestellt zu werden.
