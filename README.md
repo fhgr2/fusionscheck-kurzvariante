@@ -1,4 +1,4 @@
-gemeinde-benchmarking
+fusionscheck-kurzvariante
 =====================
 
 Tool für das ZVM (Ursin Fetz)
