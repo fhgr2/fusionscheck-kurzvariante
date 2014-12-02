@@ -10,7 +10,7 @@ Fachlich
 ========
 Grundsätzlich soll ein Tool analog zu http://www.htwchur.ch/management/institut-sife/team-themen-und-taetigkeiten/tool-exportfitness-check.html geschaffen werden. Anstatt um Export-Fitness geht es um einen Fusionscheck für Gemeinden.
 
-Die Anforderungen sind in Form einer [Excel-Datei](Fragen für Online-Tool_v2.xlsx) vorhanden. 
+Die Anforderungen sind in Form einer [Excel-Datei](docs/Fragen für Online-Tool_v2.xlsx) vorhanden. 
 
 Technisch
 =========
