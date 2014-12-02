@@ -8,13 +8,9 @@ Anforderungen
 
 Fachlich
 ========
-Grundsätzlich soll ein Tool analog zu http://www.htwchur.ch/management/institut-sife/team-themen-und-taetigkeiten/tool-exportfitness-check.html geschaffen werden. Anstatt um Export-Fitness ist das Thema Gemeinde Benchmarking im Kontext von Gemeindefusionen.
+Grundsätzlich soll ein Tool analog zu http://www.htwchur.ch/management/institut-sife/team-themen-und-taetigkeiten/tool-exportfitness-check.html geschaffen werden. Anstatt um Export-Fitness geht es um einen Fusionscheck für Gemeinden.
 
-Es werden 10 Fragen gestellt. 
-Beispiel für eine Frage: Wie viele Einwohner hat ihre Gemeinde?
-Die effektiven Fragen wird Curdin Derungs noch liefern.
-Die Antworten werden dann auf eine Skala von 0 bis 100 (oder ähnlich abgebildet) um Sie danach in einem Spiderdiagramm einer Mustergemeinde (die Daten kommen von Curdin Derungs) gegenübergestellt zu werden.
-
+Die Anforderungen sind in Form einer [Excel-Datei](Fragen für Online-Tool_v2.xlsx) vorhanden. 
 
 Technisch
 =========
