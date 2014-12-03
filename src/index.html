@@ -16,31 +16,105 @@
 <body>
  
 <div id="content_center" style="width: 490px; border: 1px solid black">
+	<script src="d3.js"></script>
+	<script src="radar-chart.js"></script>
 	<!-- cut here ✂ ------------------------- -->
+	<script src="//demo.tlab.ch/fusionscheck/d3.min.js"></script>
+	<script src="//demo.tlab.ch/fusionscheck/radar-chart.min.js"></script>
 	<div id="scoped-content"> 
-	<style type="text/css" scoped> /* may not be scoped in certain browsers, but that should not matter since we won't override css from typo3 */
-	
-	.questiontext {
-		width: 390px;
+		<style type="text/css" scoped> /* may not be scoped in certain browsers, but that should not matter since we won't override css from typo3 */
+		
+		.questiontext {
+			width: 390px;
+		}
+
+		.questioncategory {
+			font-weight: bold;
+			color: #666;
+		}
+
+		table#questiontable {
+			width: 100%;
+		}
+
+		#questiontable td {
+			padding-bottom: 10px;
+		}
+		
+		.fcinput {
+			width: 40px;
+		}
+		
+		/* radar chart options */
+	.radar-chart .level {
+		stroke: grey;
+		stroke-width: 0.5;
 	}
 
-	.questioncategory {
-		font-weight: bold;
-		color: #666;
+	.radar-chart .axis line {
+		stroke: grey;
+		stroke-width: 1;
 	}
 
-	table#questiontable {
-		width: 100%;
+	.radar-chart .axis .legend {
+		font-family: sans-serif;
+		font-size: 10px;
 	}
 
-	#questiontable td {
-		padding-bottom: 10px;
+	.radar-chart .axis .legend.top {
+		dy:1em;
 	}
-	
-	.fcinput {
-		width: 40px;
+
+	.radar-chart .axis .legend.left {
+		text-anchor: start;
 	}
-	</style>
+
+	.radar-chart .axis .legend.middle {
+		text-anchor: middle;
+	}
+
+	.radar-chart .axis .legend.right {
+		text-anchor: end;
+	}
+
+	.radar-chart .tooltip {
+		font-family: sans-serif;
+		font-size: 13px;
+		transition: opacity 200ms;
+		opacity: 0;
+	}
+
+	.radar-chart .tooltip.visible {
+		opacity: 1;
+	}
+
+	/* area transition when hovering */
+	.radar-chart .area {
+		stroke-width: 2;
+		fill-opacity: 0.5;
+	}
+
+	.radar-chart.focus .area {
+		fill-opacity: 0.1;
+	}
+
+	.radar-chart.focus .area.focused {
+		fill-opacity: 0.7;
+	}
+
+	.radar-chart .circle {
+		fill-opacity: 0.9;
+	}
+
+	/* radar chart transitions */
+	.radar-chart .area, .radar-chart .circle {
+		transition: opacity 300ms, fill-opacity 200ms;
+		opacity: 1;
+	}
+	.radar-chart .d3-enter, .radar-chart .d3-exit {
+		opacity: 0;
+	}
+		</style>
 		<table id="questiontable">
 			</tr>
 				<td><div class="questioncategory">Finanzielle Leistungsfähigkeit</div><div class="questiontext">Wie hoch ist der Selbstfinanzierungsanteil in Ihrer Gemeinde gemäss Statistik der laufenden Gemeinderechnung? </div></td>
@@ -83,7 +157,117 @@
 				<td><input class="fcinput" id="input10" type="text" size="3"/> %</td>
 			</tr>		
 		</table>
+	
+		<div id="body">
+			<div id="chart"></div>
+		</div>
+	
 	</div>
+	
+	<script>
+	// mostly taken from http://bl.ocks.org/nbremer/6506614
+	var w = 490;
+	var h = 490;
+
+	var colorscale = d3.scale.category10();
+
+	//Legend titles
+	var LegendOptions = ['Smartphone','Tablet'];
+
+	//Data
+	var d = [
+				[
+					{axis:"Email",value:0.59},
+					{axis:"Social Networks",value:0.56},
+					{axis:"Internet Banking",value:0.42},
+					{axis:"News Sportsites",value:0.34},
+					{axis:"Search Engine",value:0.98},
+					{axis:"View Shopping sites",value:0.14},
+					{axis:"Paying Online",value:0.81},
+					{axis:"Buy Online",value:0.05},
+					{axis:"Stream Music",value:0.87},
+					{axis:"Online Gaming",value:0.12},
+				],[
+					{axis:"Email",value:0.48},
+					{axis:"Social Networks",value:0.41},
+					{axis:"Internet Banking",value:0.27},
+					{axis:"News Sportsites",value:0.28},
+					{axis:"Search Engine",value:0.96},
+					{axis:"View Shopping sites",value:0.29},
+					{axis:"Paying Online",value:0.11},
+					{axis:"Buy Online",value:0.84},
+					{axis:"Stream Music",value:0.05},
+					{axis:"Online Gaming",value:0.19},
+			]
+		];
+		
+		
+
+	//Options for the Radar chart, other than default
+	var mycfg = {
+		w: w,
+		h: h,
+		maxValue: 1,
+		levels: 5,
+		ExtraWidthX: 300
+	}
+
+	//Call function to draw the Radar chart
+	//Will expect that data is in %'s
+	RadarChart.draw("#chart", d, mycfg);
+
+	////////////////////////////////////////////
+	/////////// Initiate legend ////////////////
+	////////////////////////////////////////////
+
+	var svg = d3.select('#body')
+		.selectAll('svg')
+		.append('svg')
+		.attr("width", w+300)
+		.attr("height", h)
+	
+	//Create the title for the legend
+	var text = svg.append("text")
+		.attr("class", "title")
+		.attr('transform', 'translate(90,0)') 
+		.attr("x", w - 70)
+		.attr("y", 10)
+		.attr("font-size", "12px")
+		.attr("fill", "#404040")
+		.text("What % of owners use a specific service in a week");
+			
+	//Initiate Legend	
+	var legend = svg.append("g")
+		.attr("class", "legend")
+		.attr("height", 100)
+		.attr("width", 200)
+		.attr('transform', 'translate(90,20)') 
+		;
+		
+	//Create colour squares
+	legend.selectAll('rect')
+		.data(LegendOptions)
+		.enter()
+		.append("rect")
+		.attr("x", w - 65)
+		.attr("y", function(d, i){ return i * 20;})
+		.attr("width", 10)
+		.attr("height", 10)
+		.style("fill", function(d, i){ return colorscale(i);})
+		;
+		
+	//Create text next to squares
+	legend.selectAll('text')
+		.data(LegendOptions)
+		.enter()
+		.append("text")
+		.attr("x", w - 52)
+		.attr("y", function(d, i){ return i * 20 + 9;})
+		.attr("font-size", "11px")
+		.attr("fill", "#737373")
+		.text(function(d) { return d; })
+		;
+	</script>
 	<!-- cut here ✂ ------------------------- -->
 </div>
 </body>
