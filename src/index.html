@@ -172,32 +172,32 @@
 	var colorscale = d3.scale.category10();
 
 	//Legend titles
-	var LegendOptions = ['Smartphone','Tablet'];
+	var LegendOptions = ['ZVM-Benchmark-Index','Ihre Gemeinde'];
 
 	//Data
 	var d = [
 				[
-					{value:0.59},
-					{value:0.56},
-					{value:0.42},
-					{value:0.34},
-					{value:0.98},
-					{value:0.14},
-					{value:0.81},
-					{value:0.05},
-					{value:0.87},
-					{value:0.12},
+					{value:50},
+					{value:57},
+					{value:63},
+					{value:57},
+					{value:36},
+					{value:42},
+					{value:25},
+					{value:70},
+					{value:50},
+					{value:83},
 				],[
-					{value:0.48},
-					{value:0.41},
-					{value:0.27},
-					{value:0.28},
-					{value:0.96},
-					{value:0.29},
-					{value:0.11},
-					{value:0.84},
-					{value:0.05},
-					{value:0.19},
+					{value:0},
+					{value:0},
+					{value:0},
+					{value:0},
+					{value:0},
+					{value:0},
+					{value:0},
+					{value:0},
+					{value:0},
+					{value:0},
 				]
 			];
 	
@@ -206,12 +206,24 @@
 		d[0][i-1].axis = document.getElementById("category"+i).innerHTML;
 		d[1][i-1].axis = document.getElementById("category"+i).innerHTML;
 	}
+	
+	var d2 = d.map(function(a){return a.slice();}); // deep-copy according to http://stackoverflow.com/a/13756775
+	
+	// Change order of data (to print it in CW order)
+	//d2[0][0] = d[0][0];
+	for (var i=1; i<=9; i++) {
+		d2[0][i] = d[0][10-i];
+		d2[1][i] = d[1][10-i];
+	}
+	
+	d[0] = d2[0];
+	d[1] = d2[1];
 
 	//Options for the Radar chart, other than default
 	var mycfg = {
 		w: w,
 		h: h,
-		maxValue: 1,
+		maxValue: 100,
 		levels: 5,
 		ExtraWidthX: 300
 	}
