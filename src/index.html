@@ -16,13 +16,18 @@
 <body>
  
 <div id="content_center" style="width: 490px; border: 1px solid black">
+	<script src="jquery-1.7.2_min.js"></script>
 	<script src="d3.js"></script>
 	<script src="radar-chart.js"></script>
 	<script src="URI.js"></script>
 	<!-- cut here ✂ ------------------------- -->
+	<!-- jQuery 1.7.2 is loaded automatically in Typo3 -->
+	<!-- <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script> --> 
 	<script src="//demo.tlab.ch/fusionscheck/d3.min.js"></script>
 	<script src="//demo.tlab.ch/fusionscheck/radar-chart.min.js"></script>
 	<script src="https://raw.githubusercontent.com/htwchur/fusionscheck-kurzvariante/master/src/URI.js?token=AGmaivogTAcBHP7zmLv3Vf026I6dliVhks5Uja5lwA%3D%3D"></script>
+
+	
 	<div id="scoped-content"> 
 		<style type="text/css" scoped> /* may not be scoped in certain browsers, but that should not matter since we won't override css from typo3 */
 		
@@ -291,7 +296,7 @@
 				var values = {};
 				for (index = 1; index <= 10; index++) {
 					key = DATA_PREFIX + index;
-					value = document.getElementById(key).value;
+					value = $('#' + key).value;
 					if (value !== undefined && value !== '') {
 						values[key] = value;
 					}
@@ -311,9 +316,9 @@
 				for (index = 1; index <= 10; index++) {
 					value = values[DATA_PREFIX + index];
 					if (value !== undefined) {
-						document.getElementById(DATA_PREFIX + index).value = value;
+						$('#' + DATA_PREFIX + index).val(value);
 					} else {
-						document.getElementById(DATA_PREFIX + index).value = "";
+						$('#' + DATA_PREFIX + index).val('');
 					}
 				}
 			}
@@ -353,8 +358,7 @@
 			 * @return {string} the URL with the question values encoded
 			 */
 			function generateURLWithQuestionValues() {
-				document.getElementById('urlInput').value = generateURL(
-						document.URL, readQuestionValues());
+				$('#urlInput').val(generateURL(document.URL, readQuestionValues()));
 			}
 
 			/**
