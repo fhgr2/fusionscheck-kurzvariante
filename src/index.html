@@ -247,9 +247,9 @@
 			input = Math.max(input,lower);
 			input = Math.min(input,upper);
 			if (q!=5 && q!=10) {
-				d[1][q-1].value = 100*((input-lower)/(upper-lower));
+				d[1][q-1].value = Math.round(100*((input-lower)/(upper-lower)));
 			} else {
-				d[1][q-1].value = 100*(1-(input-lower)/(upper-lower));
+				d[1][q-1].value = Math.round(100*(1-(input-lower)/(upper-lower)));
 			}
 		}
 		
