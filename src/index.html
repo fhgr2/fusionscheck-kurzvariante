@@ -16,11 +16,18 @@
 <body>
  
 <div id="content_center" style="width: 490px; border: 1px solid black">
+	<script src="jquery-1.7.2_min.js"></script>
 	<script src="d3.js"></script>
 	<script src="radar-chart.js"></script>
+	<script src="URI.js"></script>
 	<!-- cut here ✂ ------------------------- -->
+	<!-- jQuery 1.7.2 is loaded automatically in Typo3 -->
+	<!-- <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script> --> 
 	<script src="//demo.tlab.ch/fusionscheck/d3.min.js"></script>
 	<script src="//demo.tlab.ch/fusionscheck/radar-chart.min.js"></script>
+	<script src="https://raw.githubusercontent.com/htwchur/fusionscheck-kurzvariante/master/src/URI.js?token=AGmaivogTAcBHP7zmLv3Vf026I6dliVhks5Uja5lwA%3D%3D"></script>
+
+	
 	<div id="scoped-content"> 
 		<style type="text/css" scoped> /* may not be scoped in certain browsers, but that should not matter since we won't override css from typo3 */
 		
@@ -43,6 +50,7 @@
 		
 		.fcinput {
 			width: 40px;
+			text-align: right;
 		}
 		
 		/* radar chart options */
@@ -306,7 +314,103 @@
 		.text(function(d) { return d; })
 		;
 	</script>
-	<!-- cut here ✂ ------------------------- -->
+		<script>
+			var DATA_PREFIX = 'input';
+
+			/**
+			 * Return non-empty question values from the DOM.
+			 *   
+			 * @return {object.<string,string>} the non-empty question values, e.g. { input1: 50 }
+			 }
+			 */
+			function readQuestionValues() {
+				var index;
+				var key;
+				var value;
+				var values = {};
+				for (index = 1; index <= 10; index++) {
+					key = DATA_PREFIX + index;
+					value = $('#' + key).value;
+					if (value !== undefined && value !== '') {
+						values[key] = value;
+					}
+				}
+				return values;
+			}
+
+			/**
+			 * Write the question values to the DOM.
+			 *
+			 * @param {object.<string,string>} the question values, e.g. { input1: 50 }
+			 */
+			function writeQuestionValues(values) {
+				var index;
+				var key;
+				var value;
+				for (index = 1; index <= 10; index++) {
+					value = values[DATA_PREFIX + index];
+					if (value !== undefined) {
+						$('#' + DATA_PREFIX + index).val(value);
+					} else {
+						$('#' + DATA_PREFIX + index).val('');
+					}
+				}
+			}
+
+			/**
+			 * Encode the values into the URL as query like data to the fragment.
+			 *
+			 * Example:
+			 *   generateURL('example.com', {input1=50})  --> 'example.com#?input1=50'
+			 *
+			 * @param {string} the url to add the question values to.
+			 * @param {object.<string,string>} the question values, e.g. {input1: 50}
+			 */
+			function generateURL(url, values) {
+				var uri = new URI(url);
+				uri.fragment(values);
+				return uri.toString();
+			}
+
+			/**
+			 * Parse the url's fragment as query like data.
+			 *
+			 * Example:
+			 *   parseURL("example.com#?category1=50")  --> {input1: 50}
+			 *
+			 * @param {string} the url
+			 * @return {object.<string,string> the question values, e.g. {input1: 50}
+			 */
+			function parseURL(url) {
+				var uri = new URI(document.URL);
+				return uri.fragment(true);
+			}
+
+			/**
+			 * Get URL with the question values encoded into the URL as query like data to the fragment.
+			 *
+			 * @return {string} the URL with the question values encoded
+			 */
+			function generateURLWithQuestionValues() {
+				$('#urlInput').val(generateURL(document.URL, readQuestionValues()));
+			}
+
+			/**
+			 * Generate and URL with the question values encoded as query in the fragment part of the URL.
+			 */
+			function parseURLAndWriteQuestionValues() {
+				var values = parseURL(document.URL);
+				writeQuestionValues(values);
+			}
+
+			parseURLAndWriteQuestionValues();
+		</script>
+
+		<div id="url">
+    <button onClick="generateURLWithQuestionValues()" id="urlButton">Generiere Link</button>
+    <input id="urlInput" type="text" size="50"></input>
+  </div>
+ <!-- cut here ✂ ------------------------- -->
 </div>
 </body>
 </html>
