@@ -16,16 +16,13 @@
 <body>
  
 <div id="content_center" style="width: 490px; border: 1px solid black">
-	<script src="jquery-1.7.2_min.js"></script>
-	<script src="d3.js"></script>
-	<script src="radar-chart.js"></script>
-	<script src="URI.js"></script>
 	<!-- cut here ✂ ------------------------- -->
 	<!-- jQuery 1.7.2 is loaded automatically in Typo3 -->
 	<!-- <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script> --> 
-	<script src="//demo.tlab.ch/fusionscheck/d3.min.js"></script>
-	<script src="//demo.tlab.ch/fusionscheck/radar-chart.min.js"></script>
-	<script src="https://raw.githubusercontent.com/htwchur/fusionscheck-kurzvariante/master/src/URI.js?token=AGmaivogTAcBHP7zmLv3Vf026I6dliVhks5Uja5lwA%3D%3D"></script>
+	<script src="http://www.htwchur.ch/fileadmin/user_upload/institute/IKT/Forschung_und_Dienstleistung/Fusionscheck/d3.min.js"></script>
+	<script src="http://www.htwchur.ch/fileadmin/user_upload/institute/IKT/Forschung_und_Dienstleistung/Fusionscheck/radar-chart.min.js"></script>
+	<script src="http://www.htwchur.ch/fileadmin/user_upload/institute/IKT/Forschung_und_Dienstleistung/Fusionscheck/jquery-1.7.2_min.js"></script>
+	<script src="http://www.htwchur.ch/fileadmin/user_upload/institute/IKT/Forschung_und_Dienstleistung/Fusionscheck/URI.js"></script>
 
 	
 	<div id="scoped-content"> 
@@ -180,46 +177,80 @@
 	var colorscale = d3.scale.category10();
 
 	//Legend titles
-	var LegendOptions = ['Smartphone','Tablet'];
+	var LegendOptions = ['ZVM-Benchmark-Index','Ihre Gemeinde'];
 
 	//Data
 	var d = [
 				[
-					{value:0.59},
-					{value:0.56},
-					{value:0.42},
-					{value:0.34},
-					{value:0.98},
-					{value:0.14},
-					{value:0.81},
-					{value:0.05},
-					{value:0.87},
-					{value:0.12},
+					{value:50},
+					{value:57},
+					{value:63},
+					{value:57},
+					{value:36},
+					{value:42},
+					{value:25},
+					{value:70},
+					{value:50},
+					{value:83},
 				],[
-					{value:0.48},
-					{value:0.41},
-					{value:0.27},
-					{value:0.28},
-					{value:0.96},
-					{value:0.29},
-					{value:0.11},
-					{value:0.84},
-					{value:0.05},
-					{value:0.19},
+					{value:0},
+					{value:0},
+					{value:0},
+					{value:0},
+					{value:0},
+					{value:0},
+					{value:0},
+					{value:0},
+					{value:0},
+					{value:0},
 				]
 			];
+			
+	var limits = [
+		{lower:0,   upper:30},
+		{lower:14,  upper:42},
+		{lower:0,   upper:4},
+		{lower:500, upper:4000},
+		{lower:1,   upper:15},
+		{lower:5,   upper:65},
+		{lower:2,   upper:6},
+		{lower:0,   upper:100},
+		{lower:0,   upper:30},
+		{lower:0,   upper:30},
+	];
 	
-	// Read axis titles from html and put them into the json
+	// Read axis titles from html and put them into json
 	for (var i=1; i<=10; i++) {
 		d[0][i-1].axis = document.getElementById("category"+i).innerHTML;
 		d[1][i-1].axis = document.getElementById("category"+i).innerHTML;
 	}
+	
+	// Read input data and put them into json
+	
+	for (var q=1; q<=10; q++) {
+		if (q!=5 && q!=10) {
+			
+		} else {
+		
+		}
+	}
+	
+	var d2 = d.map(function(a){return a.slice();}); // deep-copy according to http://stackoverflow.com/a/13756775
+	
+	// Change order of data (to print it in CW order)
+	//d2[0][0] = d[0][0];
+	for (var i=1; i<=9; i++) {
+		d2[0][i] = d[0][10-i];
+		d2[1][i] = d[1][10-i];
+	}
+	d[0] = d2[0];
+	d[1] = d2[1];
 
 	//Options for the Radar chart, other than default
 	var mycfg = {
 		w: w,
 		h: h,
-		maxValue: 1,
+		maxValue: 100,
 		levels: 5,
 		ExtraWidthX: 300
 	}
