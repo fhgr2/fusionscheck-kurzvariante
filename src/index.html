@@ -16,12 +16,14 @@
 <body>
  
 <div id="content_center" style="width: 490px; border: 1px solid black">
-	<!-- cut here ✂ ------------------------- -->
+	<script src="http://www.htwchur.ch/fileadmin/user_upload/institute/IKT/Forschung_und_Dienstleistung/Fusionscheck/jquery-1.7.2_min.js"></script>
 	<!-- jQuery 1.7.2 is loaded automatically in Typo3 -->
 	<!-- <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script> --> 
+	
+	<!-- cut here ✂ ------------------------- -->
+	
 	<script src="http://www.htwchur.ch/fileadmin/user_upload/institute/IKT/Forschung_und_Dienstleistung/Fusionscheck/d3.min.js"></script>
 	<script src="http://www.htwchur.ch/fileadmin/user_upload/institute/IKT/Forschung_und_Dienstleistung/Fusionscheck/radar-chart.min.js"></script>
-	<script src="http://www.htwchur.ch/fileadmin/user_upload/institute/IKT/Forschung_und_Dienstleistung/Fusionscheck/jquery-1.7.2_min.js"></script>
 	<script src="http://www.htwchur.ch/fileadmin/user_upload/institute/IKT/Forschung_und_Dienstleistung/Fusionscheck/URI.js"></script>
 
 	
@@ -351,7 +353,7 @@
 			var values = {};
 			for (index = 1; index <= 10; index++) {
 				key = DATA_PREFIX + index;
-				value = $('#' + key).value;
+				value = $('#' + key).val();
 				if (value !== undefined && value !== '') {
 					values[key] = value;
 				}
@@ -413,7 +415,8 @@
 		 * @return {string} the URL with the question values encoded
 		 */
 		function generateURLWithQuestionValues() {
-			$('#urlInput').val(generateURL(document.URL, readQuestionValues()));
+			var url = generateURL(document.URL, readQuestionValues());
+			$('#urlInput').val(url);
 		}
 
 		/**
@@ -428,7 +431,7 @@
 	</script>
 
 	<div id="url">
-    <button onClick="generateURLWithQuestionValues()" id="urlButton">Generiere Link</button>
+    <button onClick="generateURLWithQuestionValues();" id="urlButton">Generiere Link</button>
     <input id="urlInput" type="text" size="50"></input>
   </div>
  <!-- cut here ✂ ------------------------- -->
