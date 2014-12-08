@@ -197,14 +197,15 @@
 					{value:0},
 					{value:0},
 					{value:0},
+					{value:100},
 					{value:0},
 					{value:0},
 					{value:0},
 					{value:0},
-					{value:0},
-					{value:0},
+					{value:100},
 				]
 			];
+	var d_plot;
 			
 	var limits = [
 		{lower:0,   upper:30},
@@ -219,32 +220,57 @@
 		{lower:0,   upper:30},
 	];
 	
+	// register callback functions for changing forms
+	$('.fcinput').keyup(function(){
+		update();
+	});
+	
+	function update() {
+		// Read input data and put them into json
+		for (var q=1; q<=10; q++) {
+			var input = parseFloat($('#input'+q).val());
+			if (isNaN(input)) {
+				if (q!=5 && q!=10) {
+					input = 0;
+				} else {
+					input = 100;
+				}
+			}
+			var lower = limits[q-1].lower;
+			var upper = limits[q-1].upper;
+			input = Math.max(input,lower);
+			input = Math.min(input,upper);
+			if (q!=5 && q!=10) {
+				d[1][q-1].value = 100*((input-lower)/(upper-lower));
+			} else {
+				d[1][q-1].value = 100*(1-(input-lower)/(upper-lower));
+			}
+		}
+		
+		// update data to be plotted
+		d_plot = deepCopy(d);
+		
+		// Change order of data (to print it in CW order)
+		// d_plot[0][0] = d[0][0]; // implicitly
+		for (var i=1; i<=9; i++) {
+			d_plot[0][i] = d[0][10-i];
+			d_plot[1][i] = d[1][10-i];
+		}
+		
+		RadarChart.draw("#chart", d_plot, mycfg);
+	}
+	
+	function deepCopy(oldObject) {
+		//return jQuery.extend(true, {}, oldObject); // deep-copy according to http://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-clone-an-object ; seems not to work
+		return oldObject.map(function(a){return a.slice();}); // deep-copy according to http://stackoverflow.com/a/13756775
+	}
+
+	
 	// Read axis titles from html and put them into json
 	for (var i=1; i<=10; i++) {
 		d[0][i-1].axis = document.getElementById("category"+i).innerHTML;
 		d[1][i-1].axis = document.getElementById("category"+i).innerHTML;
 	}
-	
-	// Read input data and put them into json
-	
-	for (var q=1; q<=10; q++) {
-		if (q!=5 && q!=10) {
-			
-		} else {
-		
-		}
-	}
-	
-	var d2 = d.map(function(a){return a.slice();}); // deep-copy according to http://stackoverflow.com/a/13756775
-	
-	// Change order of data (to print it in CW order)
-	//d2[0][0] = d[0][0];
-	for (var i=1; i<=9; i++) {
-		d2[0][i] = d[0][10-i];
-		d2[1][i] = d[1][10-i];
-	}
-	d[0] = d2[0];
-	d[1] = d2[1];
 
 	//Options for the Radar chart, other than default
 	var mycfg = {
@@ -255,10 +281,8 @@
 		ExtraWidthX: 300
 	}
 
-	//Call function to draw the Radar chart
-	//Will expect that data is in %'s
-	RadarChart.draw("#chart", d, mycfg);
-
+	update();
+	
 	////////////////////////////////////////////
 	/////////// Initiate legend ////////////////
 	////////////////////////////////////////////
@@ -311,99 +335,99 @@
 		.text(function(d) { return d; })
 		;
 	</script>
-		<script>
-			var DATA_PREFIX = 'input';
+	<script>
+		var DATA_PREFIX = 'input';
 
-			/**
-			 * Return non-empty question values from the DOM.
-			 *   
-			 * @return {object.<string,string>} the non-empty question values, e.g. { input1: 50 }
-			 }
-			 */
-			function readQuestionValues() {
-				var index;
-				var key;
-				var value;
-				var values = {};
-				for (index = 1; index <= 10; index++) {
-					key = DATA_PREFIX + index;
-					value = $('#' + key).value;
-					if (value !== undefined && value !== '') {
-						values[key] = value;
-					}
-				}
-				return values;
-			}
-
-			/**
-			 * Write the question values to the DOM.
-			 *
-			 * @param {object.<string,string>} the question values, e.g. { input1: 50 }
-			 */
-			function writeQuestionValues(values) {
-				var index;
-				var key;
-				var value;
-				for (index = 1; index <= 10; index++) {
-					value = values[DATA_PREFIX + index];
-					if (value !== undefined) {
-						$('#' + DATA_PREFIX + index).val(value);
-					} else {
-						$('#' + DATA_PREFIX + index).val('');
-					}
+		/**
+		 * Return non-empty question values from the DOM.
+		 *   
+		 * @return {object.<string,string>} the non-empty question values, e.g. { input1: 50 }
+		 }
+		 */
+		function readQuestionValues() {
+			var index;
+			var key;
+			var value;
+			var values = {};
+			for (index = 1; index <= 10; index++) {
+				key = DATA_PREFIX + index;
+				value = $('#' + key).value;
+				if (value !== undefined && value !== '') {
+					values[key] = value;
 				}
 			}
+			return values;
+		}
 
-			/**
-			 * Encode the values into the URL as query like data to the fragment.
-			 *
-			 * Example:
-			 *   generateURL('example.com', {input1=50})  --> 'example.com#?input1=50'
-			 *
-			 * @param {string} the url to add the question values to.
-			 * @param {object.<string,string>} the question values, e.g. {input1: 50}
-			 */
-			function generateURL(url, values) {
-				var uri = new URI(url);
-				uri.fragment(values);
-				return uri.toString();
+		/**
+		 * Write the question values to the DOM.
+		 *
+		 * @param {object.<string,string>} the question values, e.g. { input1: 50 }
+		 */
+		function writeQuestionValues(values) {
+			var index;
+			var key;
+			var value;
+			for (index = 1; index <= 10; index++) {
+				value = values[DATA_PREFIX + index];
+				if (value !== undefined) {
+					$('#' + DATA_PREFIX + index).val(value);
+				} else {
+					$('#' + DATA_PREFIX + index).val('');
+				}
 			}
+		}
 
-			/**
-			 * Parse the url's fragment as query like data.
-			 *
-			 * Example:
-			 *   parseURL("example.com#?category1=50")  --> {input1: 50}
-			 *
-			 * @param {string} the url
-			 * @return {object.<string,string> the question values, e.g. {input1: 50}
-			 */
-			function parseURL(url) {
-				var uri = new URI(document.URL);
-				return uri.fragment(true);
-			}
+		/**
+		 * Encode the values into the URL as query like data to the fragment.
+		 *
+		 * Example:
+		 *   generateURL('example.com', {input1=50})  --> 'example.com#?input1=50'
+		 *
+		 * @param {string} the url to add the question values to.
+		 * @param {object.<string,string>} the question values, e.g. {input1: 50}
+		 */
+		function generateURL(url, values) {
+			var uri = new URI(url);
+			uri.fragment(values);
+			return uri.toString();
+		}
 
-			/**
-			 * Get URL with the question values encoded into the URL as query like data to the fragment.
-			 *
-			 * @return {string} the URL with the question values encoded
-			 */
-			function generateURLWithQuestionValues() {
-				$('#urlInput').val(generateURL(document.URL, readQuestionValues()));
-			}
+		/**
+		 * Parse the url's fragment as query like data.
+		 *
+		 * Example:
+		 *   parseURL("example.com#?category1=50")  --> {input1: 50}
+		 *
+		 * @param {string} the url
+		 * @return {object.<string,string> the question values, e.g. {input1: 50}
+		 */
+		function parseURL(url) {
+			var uri = new URI(document.URL);
+			return uri.fragment(true);
+		}
 
-			/**
-			 * Generate and URL with the question values encoded as query in the fragment part of the URL.
-			 */
-			function parseURLAndWriteQuestionValues() {
-				var values = parseURL(document.URL);
-				writeQuestionValues(values);
-			}
+		/**
+		 * Get URL with the question values encoded into the URL as query like data to the fragment.
+		 *
+		 * @return {string} the URL with the question values encoded
+		 */
+		function generateURLWithQuestionValues() {
+			$('#urlInput').val(generateURL(document.URL, readQuestionValues()));
+		}
 
-			parseURLAndWriteQuestionValues();
-		</script>
+		/**
+		 * Generate and URL with the question values encoded as query in the fragment part of the URL.
+		 */
+		function parseURLAndWriteQuestionValues() {
+			var values = parseURL(document.URL);
+			writeQuestionValues(values);
+		}
 
-		<div id="url">
+		parseURLAndWriteQuestionValues();
+	</script>
+
+	<div id="url">
     <button onClick="generateURLWithQuestionValues()" id="urlButton">Generiere Link</button>
     <input id="urlInput" type="text" size="50"></input>
   </div>
