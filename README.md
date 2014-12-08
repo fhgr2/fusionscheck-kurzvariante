@@ -16,6 +16,11 @@ Technisch
 =========
 JavaScript-basiertes Tool, welches sich ins Typo3 einbinden lässt, analog zur Übersicht der Fachzeitschriften auf http://www.htwchur.ch/services/fuer-alle/bibliothek/abonnierte-fachzeitschriften.html.
 
+Guidelines
+==========
+JavaScript
+- Dokumentation gemäss http://usejsdoc.org/tags-type.html
+
 Administrativ
 =============
 - Aufwand: 40 h
