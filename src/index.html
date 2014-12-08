@@ -296,7 +296,7 @@
 				var values = {};
 				for (index = 1; index <= 10; index++) {
 					key = DATA_PREFIX + index;
-					value = $('#' + key).value;
+					value = $('#' + key).val();
 					if (value !== undefined && value !== '') {
 						values[key] = value;
 					}
@@ -358,7 +358,8 @@
 			 * @return {string} the URL with the question values encoded
 			 */
 			function generateURLWithQuestionValues() {
-				$('#urlInput').val(generateURL(document.URL, readQuestionValues()));
+				var url = generateURL(document.URL, readQuestionValues());
+				 $('#urlInput').val(url);
 			}
 
 			/**
@@ -373,7 +374,7 @@
 		</script>
 
 		<div id="url">
-    <button onClick="generateURLWithQuestionValues()" id="urlButton">Generiere Link</button>
+    <button onClick="generateURLWithQuestionValues();" id="urlButton">Generiere Link</button>
     <input id="urlInput" type="text" size="50"></input>
   </div>
  <!-- cut here ✂ ------------------------- -->
