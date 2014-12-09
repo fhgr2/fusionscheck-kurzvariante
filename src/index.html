@@ -287,7 +287,8 @@
 		h: h,
 		maxValue: 100,
 		levels: 5,
-		ExtraWidthX: 300
+		ExtraWidthX: 300,
+		color: function(i) {if (i==0){return 'hsl(204,100%,34%)';} else {return 'hsl(0,60%,50%)';}}
 	}
 
 	update();
