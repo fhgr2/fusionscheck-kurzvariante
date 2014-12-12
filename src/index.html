@@ -273,6 +273,14 @@
 		//return jQuery.extend(true, {}, oldObject); // deep-copy according to http://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-clone-an-object ; seems not to work
 		return oldObject.map(function(a){return a.slice();}); // deep-copy according to http://stackoverflow.com/a/13756775
 	}
+	
+	function getColor(i) {
+		if (i==0){
+			return 'hsl(204,100%,34%)';
+		} else {
+			return 'hsl(0,60%,50%)';
+		}
+	}
 
 	
 	// Read axis titles from html and put them into json
@@ -288,7 +296,7 @@
 		maxValue: 100,
 		levels: 5,
 		ExtraWidthX: 300,
-		color: function(i) {if (i==0){return 'hsl(204,100%,34%)';} else {return 'hsl(0,60%,50%)';}}
+		color: getColor
 	}
 
 	update();
@@ -330,7 +338,7 @@
 		.attr("y", function(d, i){ return i * 20;})
 		.attr("width", 10)
 		.attr("height", 10)
-		.style("fill", function(d, i){ return colorscale(i);})
+		.style("fill", function(d, i){ return getColor(i);})
 		;
 		
 	//Create text next to squares
