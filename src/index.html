@@ -33,21 +33,18 @@
 
 	
 	<div id="scoped-content"> 
-		<style type="text/css" scoped> /* may not be scoped in certain browsers, but that should not matter since we won't override css from typo3 */
+		<style type="text/css" scoped> /* may not be scoped in certain browsers, but that should not matter since we (mostly) won't override css from typo3 */
 		
 		.questiontext {
 			width: 390px;
 		}
 
-		.questioncategory {
-		}
-
-		table#questiontable {
-			width: 100%;
-		}
-
 		#questiontable td {
 			padding-bottom: 10px;
+		}
+		
+		#body {
+			margin-top: 20px;
 		}
 		
 		#questiontable h3 {
@@ -135,7 +132,6 @@
 			opacity: 0;
 		}
 		
-		#questiontable 
 		</style>
 		
 		<div id="questiontable">
