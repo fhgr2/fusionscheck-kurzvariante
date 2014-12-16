@@ -316,7 +316,11 @@
 	
 	$(function() {
 		$("#questiontable").accordion({
-			collapsible: true
+			collapsible: true,
+			change: function(event, ui) { // 'changestart' can't focus
+				ui.newContent.find("input").select();
+				ui.newContent.find("input").focus();
+			}
 		});
 	});
 	
