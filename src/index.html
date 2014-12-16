@@ -36,7 +36,7 @@
 		<style type="text/css" scoped> /* may not be scoped in certain browsers, but that should not matter since we (mostly) won't override css from typo3 */
 		
 		.questiontext {
-			width: 390px;
+			width: 450px;
 		}
 
 		#questiontable td {
@@ -54,6 +54,10 @@
 		
 		#questiontable {
 			font-family: Arial,Helvetica,sans-serif; /* overwrites jquery ui css */
+		}
+		
+		#questiontable ui-accordion-content {
+			padding-right: 0px;
 		}
 		
 		.fcinput {
@@ -266,7 +270,24 @@
 		update();
 		$('#input1').select();
 		$('#input1').focus();
+		
+		assignKeysToNext();
 	});
+	
+	// Define behaviour of Enter/Tab in Forms
+	function assignKeysToNext() {
+		$('.fcinput').keypress(function(event){
+			var pattern = /\d+/; //Regex: one or more digits
+			var currentQuestion = parseInt(pattern.exec($(this).attr("id"))[0]); // executing the regex returns an array
+			var nextQuestion = currentQuestion+1;
+			if (currentQuestion < 10) { // skip last question
+				var keycode = (event.keyCode ? event.keyCode : event.which); // http://stackoverflow.com/a/9690459
+				if(keycode == '13' || keycode == '9') { // 13: Enter, 9: Tab
+					$("#questiontable").accordion("option", "active", nextQuestion-1); // accordion index starts with 0
+				}
+			}
+		});
+	}
 	
 	function update() {
 		// Read input data and put them into json
