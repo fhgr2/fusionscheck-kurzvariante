@@ -277,7 +277,7 @@
 	
 	// Define behaviour of Enter/Tab in Forms
 	function assignKeysToNext() {
-		$('.fcinput').keypress(function(event){
+		$('.fcinput').keydown(function(event){ // https://stackoverflow.com/questions/16889576/keypress-on-tab-not-working
 			var pattern = /\d+/; //Regex: one or more digits
 			var currentQuestion = parseInt(pattern.exec($(this).attr("id"))[0]); // executing the regex returns an array
 			var nextQuestion = currentQuestion+1;
