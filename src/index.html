@@ -274,6 +274,7 @@
 	});
 	
 	$(document).ready(function(){
+		RadarChart.draw("#chart", d_plot, mycfg);
 		update();
 		$('#input1').select();
 		$('#input1').focus();
@@ -328,7 +329,7 @@
 			d_plot[1][i] = d[1][10-i];
 		}
 		
-		RadarChart.draw("#chart", d_plot, mycfg);
+		d3.select('#chart').select('svg').datum(d_plot).call(RadarChart.chart().config(mycfg))
 	}
 	
 	function deepCopy(oldObject) {
@@ -367,7 +368,8 @@
 		maxValue: 100,
 		levels: 5,
 		ExtraWidthX: 300,
-		color: getColor
+		color: getColor,
+		transitionDuration: 500
 	}
 
 	update();
