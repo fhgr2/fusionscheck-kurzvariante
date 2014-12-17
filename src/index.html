@@ -139,11 +139,12 @@
 
 		/* radar chart transitions */
 		.radar-chart .area, .radar-chart .circle {
+			transition: opacity 300ms, fill-opacity 200ms;
 			opacity: 1;
 		}
 		
 		.radar-chart .d3-enter, .radar-chart .d3-exit {
-			opacity: 0;
+			opacity: 1;
 		}
 		
 		</style>
