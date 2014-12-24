@@ -153,6 +153,12 @@
 		
 		#formulartabelle .registrationinput {
 			width: 200px;
+			margin-left: 10px;
+		}
+		
+		#datenschutzlink {
+			text-align: right;
+			display: block;
 		}
 		
 		</style>
@@ -239,8 +245,13 @@
 				<td>E-Mail</td><td><input type="text" name="email" class="registrationinput"/></td>
 			</tr>
 		</table>
-		Was passiert mit den Daten?<br><br>
+		<a id="datenschutzlink" onclick="$('#datenschutzerklaerung').dialog('open');">Was passiert mit den Daten?</a><br>
 		</div>
+		
+		<div id="datenschutzerklaerung">
+			Die Daten werden auf Google Servern zwischengespeichert und von uns statistisch ausgewertet. Möglicherweise werden wir sie in anonymisierter Form veröffentlichen. Mittels der angegebenen E-Mail Adresse werden wir mit ihnen in Kontakt treten.
+		</div>
+		
 		</form>
 	
 	</div>
@@ -312,6 +323,11 @@
 		$('#input1').focus();
 		
 		assignKeysToNext();
+		
+		$('#datenschutzerklaerung').dialog({
+			autoOpen: false,
+			buttons: {"OK": function() {$(this).dialog("close");}},
+		});
 	});
 	
 	function considerLinkButtonActivation() {
