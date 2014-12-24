@@ -233,23 +233,23 @@
 		<div>Möchten Sie die Auswertung weiterschicken? Dann beantworten Sie folgende Fragen:
 		<table id="formulartabelle">
 			<tr>
-				<td>Vorname</td><td><input type="text" name="vorname" size="50" class="registrationinput"/></td>
+				<td>Ihr Vorname</td><td><input type="text" name="vorname" size="50" class="registrationinput"/></td>
 			</tr>
 			<tr>
-				<td>Name</td><td><input type="text" name="name" class="registrationinput"/></td>
+				<td>Ihr Name</td><td><input type="text" name="name" class="registrationinput"/></td>
 			</tr>
 			<tr>
-				<td>Gemeinde</td><td><input type="text" name="gemeinde" class="registrationinput"/></td>
+				<td>Ihre Gemeinde</td><td><input type="text" name="gemeinde" class="registrationinput"/></td>
 			</tr>
 			<tr>
-				<td>E-Mail</td><td><input type="text" name="email" class="registrationinput"/></td>
+				<td>Ihre E-Mail</td><td><input type="text" name="email" class="registrationinput"/></td>
 			</tr>
 		</table>
 		<a id="datenschutzlink" onclick="$('#datenschutzerklaerung').dialog('open');">Was passiert mit den Daten?</a><br>
 		</div>
 		
 		<div id="datenschutzerklaerung">
-			Die Daten werden auf Google Servern zwischengespeichert und von uns statistisch ausgewertet. Möglicherweise werden wir sie in anonymisierter Form veröffentlichen. Mittels der angegebenen E-Mail Adresse werden wir mit ihnen in Kontakt treten.
+			Die eingegebenen Daten werden auf Google Servern zwischengespeichert und von uns statistisch ausgewertet. Möglicherweise werden wir sie in anonymisierter Form veröffentlichen. Mittels der angegebenen E-Mail Adresse werden wir mit ihnen in Kontakt treten.
 		</div>
 		
 		</form>
@@ -406,6 +406,27 @@
 		} else {
 			return 'hsl(0,60%,50%)';
 		}
+	}
+	
+	function sendForm() {
+		var name     = $('#formulartabelle input[name=name]').val();
+		var vorname  = $('#formulartabelle input[name=vorname]').val();
+		var gemeinde = $('#formulartabelle input[name=gemeinde]').val();
+		var email    = $('#formulartabelle input[name=email]').val();
+		var url      = $('#urlInput').val();
+		
+		$.ajax({
+			url: "https://docs.google.com/forms/d/1CE5UAXv6EYCpxiutjhdaCuBLX7rPlDJjl1Ux4EZrCDQ/formResponse",
+			data: {
+				"entry.126685309":  email,
+				"entry.1925999948": gemeinde,
+				"entry.1965570546": name,
+				"entry.284440796":  vorname,
+				"entry.691170952":  url
+			},
+			type: "POST",
+			dataType: "xml",
+		});
 	}
 	
 	$(function() {
@@ -583,7 +604,7 @@
 	</script>
 
 	<div id="url">
-    <button disabled="disabled" onClick="generateURLWithQuestionValues();" id="urlButton">Generiere Link</button>
+    <button disabled="disabled" onClick="generateURLWithQuestionValues(); sendForm();" id="urlButton">Generiere Link</button>
     <input id="urlInput" type="text" size="50"></input>
   </div>
  <!-- cut here ✂ ------------------------- -->
