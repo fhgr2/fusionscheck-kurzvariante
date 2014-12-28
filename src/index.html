@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
  
 <html>
  
@@ -288,7 +288,11 @@
 			var pattern = /\d+/; //Regex: one or more digits
 			var currentQuestion = parseInt(pattern.exec($(this).attr("id"))[0]); // executing the regex returns an array
 			var nextQuestion = currentQuestion+1;
-			if (currentQuestion < 10) { // skip last question
+			var forward = !event.shiftKey;
+			if (!forward) {
+				nextQuestion = currentQuestion-1;
+			}			
+			if ((currentQuestion < 10 && forward) || (currentQuestion > 1 && !forward)) { // skip last question on tab forward
 				var keycode = (event.keyCode ? event.keyCode : event.which); // http://stackoverflow.com/a/9690459
 				if(keycode == '13' || keycode == '9') { // 13: Enter, 9: Tab
 					$("#questiontable").accordion("option", "active", nextQuestion-1); // accordion index starts with 0
