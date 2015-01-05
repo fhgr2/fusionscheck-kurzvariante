@@ -147,6 +147,20 @@
 			opacity: 1;
 		}
 		
+		#formulartabelle {
+			margin: 10px;
+		}
+		
+		#formulartabelle .registrationinput {
+			width: 200px;
+			margin-left: 10px;
+		}
+		
+		#datenschutzlink {
+			text-align: right;
+			display: block;
+		}
+		
 		</style>
 		
 		<div id="questiontable">
@@ -214,6 +228,31 @@
 		<div id="body">
 			<div id="chart"></div>
 		</div>
+		
+		<form>
+		<div>Möchten Sie die Auswertung weiterschicken? Dann beantworten Sie folgende Fragen:
+		<table id="formulartabelle">
+			<tr>
+				<td>Ihr Vorname</td><td><input type="text" name="vorname" size="50" class="registrationinput"/></td>
+			</tr>
+			<tr>
+				<td>Ihr Name</td><td><input type="text" name="name" class="registrationinput"/></td>
+			</tr>
+			<tr>
+				<td>Ihre Gemeinde</td><td><input type="text" name="gemeinde" class="registrationinput"/></td>
+			</tr>
+			<tr>
+				<td>Ihre E-Mail</td><td><input type="text" name="email" class="registrationinput"/></td>
+			</tr>
+		</table>
+		<a id="datenschutzlink" onclick="$('#datenschutzerklaerung').dialog('open');">Was passiert mit den Daten?</a><br>
+		</div>
+		
+		<div id="datenschutzerklaerung">
+			Die Daten werden auf Google Servern zwischengespeichert und stehen uns ausschliesslich für eine allfällige Kontaktaufnahme zur Verfügung.
+		</div>
+		
+		</form>
 	
 	</div>
 	
@@ -273,6 +312,10 @@
 		update();
 	});
 	
+	$('.registrationinput').keyup(function(){
+		considerLinkButtonActivation();
+	});
+	
 	$(document).ready(function(){
 		RadarChart.draw("#chart", d_plot, mycfg);
 		update();
@@ -280,7 +323,27 @@
 		$('#input1').focus();
 		
 		assignKeysToNext();
+		
+		$('#datenschutzerklaerung').dialog({
+			autoOpen: false,
+			buttons: {"OK": function() {$(this).dialog("close");}},
+		});
 	});
+	
+	function considerLinkButtonActivation() {
+		if (
+			$('#formulartabelle input[name=vorname]').val() != "" &&
+			$('#formulartabelle input[name=name]').val() != "" &&
+			$('#formulartabelle input[name=gemeinde]').val() != "" &&
+			$('#formulartabelle input[name=email]').val() != ""
+		) {
+			//enable button
+			$('#urlButton').removeAttr('disabled');
+		} else {
+			// disable button
+			$('#urlButton').attr('disabled', 'disabled');
+		}
+	}
 	
 	// Define behaviour of Enter/Tab in Forms
 	function assignKeysToNext() {
@@ -347,6 +410,27 @@
 		} else {
 			return 'hsl(0,60%,50%)';
 		}
+	}
+	
+	function sendForm() {
+		var name     = $('#formulartabelle input[name=name]').val();
+		var vorname  = $('#formulartabelle input[name=vorname]').val();
+		var gemeinde = $('#formulartabelle input[name=gemeinde]').val();
+		var email    = $('#formulartabelle input[name=email]').val();
+		var url      = $('#urlInput').val();
+		
+		$.ajax({
+			url: "https://docs.google.com/forms/d/1piWA6Wtn4fV2PN8LWfP4-HkhXu6sXoKBKAa-Fiokwrg/formResponse",
+			data: {
+				"entry.20514741":  email,
+				"entry.735742777": gemeinde,
+				"entry.1228623011": name,
+				"entry.1980467123":  vorname,
+				"entry.1762036748":  url
+			},
+			type: "POST",
+			dataType: "xml",
+		});
 	}
 	
 	$(function() {
@@ -524,7 +608,7 @@
 	</script>
 
 	<div id="url">
-    <button onClick="generateURLWithQuestionValues();" id="urlButton">Generiere Link</button>
+    <button disabled="disabled" onClick="generateURLWithQuestionValues(); sendForm();" id="urlButton">Generiere Link</button>
     <input id="urlInput" type="text" size="50"></input>
   </div>
  <!-- cut here ✂ ------------------------- -->
