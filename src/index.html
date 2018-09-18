@@ -15,7 +15,7 @@
  
 <body>
  
-<div id="content_center" style="width: 490px; border: 1px solid black; margin-top: 200px">
+<div id="content_center" style="border: 1px solid black; margin-top: 200px">
 	<!-- jQuery 3.3.1 is loaded automatically in Typo3 -->
 	<script src="./jquery-1.7.2_min.js"></script>
 
@@ -40,7 +40,6 @@
 		<style type="text/css" scoped> /* may not be scoped in certain browsers, but that should not matter since we (mostly) won't override css from typo3 */
 		
 		.questiontext {
-			width: 450px;
 		}
 
 		#questiontable td {
@@ -77,7 +76,8 @@
 		}
 		
 		svg.radar-chart {
-			height: 500px;
+			xheight: 500px;
+			width: 100%;
 		}
 		
 		/* radar chart options */
@@ -156,12 +156,12 @@
 		}
 		
 		#formulartabelle .registrationinput {
-			width: 200px;
+			width: 80%;
 			margin-left: 10px;
 		}
 		
 		#datenschutzlink {
-			text-align: right;
+			xtext-align: right;
 			display: block;
 		}
 		
@@ -262,8 +262,17 @@
 	
 	<script>
 	// mostly taken from http://bl.ocks.org/nbremer/6506614
-	var w = 490;
-	var h = 490;
+	var w = $(window).width()-20;
+	var h = $(window).width()-20;
+	
+	$(window).resize(function(){
+		mycfg.w = $(window).width()-20;
+		mycfg.h = $(window).width()-20;
+		RadarChart.draw("#chart", d_plot, mycfg);
+		update();
+
+	});
+
 
 	var colorscale = d3.scale.category10();
 
