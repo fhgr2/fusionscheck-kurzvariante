@@ -28,11 +28,6 @@
 	-->
 	
 	<!-- cut here ✂ ------------------------- -->
-	<script src="./jquery-ui-1.12.1.min.js"></script>
-	<script src="./d3.min.js"></script>
-	<script src="./radar-chart.min.js"></script>
-	<script src="./URI.js"></script>
-
 	
 	<div id="scoped-content"> 
 		<style type="text/css" scoped> /* may not be scoped in certain browsers, but that should not matter since we (mostly) won't override css from typo3 */
@@ -258,7 +253,15 @@
 	
 	</div>
 	
+	<script src="./d3.min.js"></script>
+	<script src="./radar-chart.min.js"></script>
+	<script src="./URI.js"></script>
+	<script src="./load_jquery-ui-1.12.1.min.js"></script>
+
 	<script>
+
+function load_FusionscheckKurzvariante() {
+	
 	// mostly taken from http://bl.ocks.org/nbremer/6506614
 	var w = $(window).width()-20;
 	var h = $(window).width()-20;
@@ -327,19 +330,6 @@
 		considerLinkButtonActivation();
 	});
 	
-	$(document).ready(function(){
-		RadarChart.draw("#chart", d_plot, mycfg);
-		update();
-		$('#input1').select();
-		$('#input1').focus();
-		
-		assignKeysToNext();
-		
-		$('#datenschutzerklaerung').dialog({
-			autoOpen: false,
-			buttons: {"OK": function() {$(this).dialog("close");}},
-		});
-	});
 	
 	function considerLinkButtonActivation() {
 		if (
@@ -443,17 +433,7 @@
 			dataType: "xml",
 		});
 	}
-	
-	$(function() {
-		$("#questiontable").accordion({
-			collapsible: true,
-			change: function(event, ui) { // 'changestart' can't focus
-				ui.newContent.find("input").select();
-				ui.newContent.find("input").focus();
-			}
-		});
-	});
-	
+		
 	// Read axis titles from html and put them into json
 	for (var i=1; i<=10; i++) {
 		d[0][i-1].axis = document.getElementById("category"+i).innerHTML;
@@ -524,8 +504,8 @@
 		.attr("fill", "#737373")
 		.text(function(d) { return d; })
 		;
-	</script>
-	<script>
+
+
 		var DATA_PREFIX = 'input';
 
 		/**
@@ -616,6 +596,37 @@
 		}
 
 		parseURLAndWriteQuestionValues();
+
+		
+		// after everything has been loaded
+		RadarChart.draw("#chart", d_plot, mycfg);
+		update();
+		$('#input1').select();
+		$('#input1').focus();
+		
+		assignKeysToNext();
+		
+		$('#datenschutzerklaerung').dialog({
+			autoOpen: false,
+			buttons: {"OK": function() {$(this).dialog("close");}},
+		});
+
+		
+		$("#questiontable").accordion({
+			collapsible: true,
+			change: function(event, ui) { // 'changestart' can't focus
+				ui.newContent.find("input").select();
+				ui.newContent.find("input").focus();
+			}
+		});
+
+}
+
+window.onload = function () {
+	load_jquery_ui_1_12_1_min();
+	load_FusionscheckKurzvariante();
+}
+
 	</script>
 
 	<div id="url">
