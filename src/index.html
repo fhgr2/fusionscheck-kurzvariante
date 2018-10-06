@@ -263,12 +263,12 @@
 function load_FusionscheckKurzvariante() {
 	
 	// mostly taken from http://bl.ocks.org/nbremer/6506614
-	var w = $(window).width()-20;
-	var h = $(window).width()-20;
+	var w = $("#body").width()-20;
+	var h = $("#body").width()-20;
 	
 	$(window).resize(function(){
-		mycfg.w = $(window).width()-20;
-		mycfg.h = $(window).width()-20;
+		mycfg.w = $("#body").width()-20;
+		mycfg.h = $("#body").width()-20;
 		RadarChart.draw("#chart", d_plot, mycfg);
 		update();
 
