@@ -29,13 +29,18 @@ Die Installation erfolgt ins Typo3 mittels HTML-Elemente.
 
 ## Bibliotheken
 
-Für jede  Bibliotheken nach der Angabe
-```javascript
-<!-- cut here ✂ ------------------------- -->
-```
+### d3, radar chart, URI
+Für die folgenden Bibliotheken:
+- d3.min.js
+- radar-chart.min.js
+- URI.js
+- load_jquery-ui-1.12.1.min.js
+
 wird ein HTML-Element erzeugt und der Inhalt der JavaScript-Datei mit
 ```
 <script>
   hier kommt der Inhalt der JavaScript-Bibliothek
 </script>
 ```
+
+### 
