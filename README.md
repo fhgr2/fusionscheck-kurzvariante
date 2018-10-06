@@ -34,6 +34,7 @@ Für die folgenden Bibliotheken:
 - d3.min.js
 - radar-chart.min.js
 - URI.js
+- load_jquery-ui-1.12.1.min.js
 
 wird ein HTML-Element erzeugt und der Inhalt der JavaScript-Datei mit
 ```
@@ -41,9 +42,5 @@ wird ein HTML-Element erzeugt und der Inhalt der JavaScript-Datei mit
   hier kommt der Inhalt der JavaScript-Bibliothek
 </script>
 ```
-
-### jQueryUI
-
-Der Inhalt von load_jquery-ui-1.12.1.min.js wird unverändert in ein HTML-Element kopiert.
 
 ### 
