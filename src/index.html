@@ -34,6 +34,18 @@
 		<style type="text/css" scoped> /* may not be scoped in certain browsers, but that should not matter since we (mostly) won't override css from typo3 */
 		
 		.questiontext {
+			font-size: 16px;
+			font-weight: 300;
+		}
+
+		#questiontable span {
+			font-size: 16px;
+			font-weight: 300;
+		}
+		
+		#questiontable {
+			font-size: 12px; /* overwrites jquery ui css */
+			font-family: Roboto, Arial,Helvetica,sans-serif; /* overwrites jquery ui css */
 		}
 
 		#questiontable td {
@@ -46,17 +58,26 @@
 			background: none;
 		}
 		
-		#questiontable {
-			font-size: 12px; /* overwrites jquery ui css */
-			font-family: Arial,Helvetica,sans-serif; /* overwrites jquery ui css */
-		}
-		
 		#body {
 			margin-top: 20px;
+			font-family: Roboto, sans-serif;
+			font-size: 16px;
+			font-weight: 300;
+
 		}
 		
+		form {
+			font-size: 16px;
+			line-height: 1.44;
+			font-weight: 300;
+			font-family: Roboto, Arial,Helvetica,sans-serif; /* overwrites jquery ui css */
+		}
+		
+		/* mimic h3 on webpage */
 		#questiontable h3 {
-			font-size: 19px; /* overwrites jquery ui css */
+			font-size: 26px; /* overwrites jquery ui css */
+			font-weight: 300;
+			line-height: 1.32;
 			padding-left: 30px;
 		}
 		
@@ -86,8 +107,9 @@
 		}
 
 		.radar-chart .axis .legend {
-			font-family: sans-serif;
-			font-size: 10px;
+			font-family: Roboto, sans-serif;
+			font-size: 16px;
+			font-weight: 300;
 		}
 
 		.radar-chart .axis .legend.top {
@@ -107,8 +129,9 @@
 		}
 
 		.radar-chart .tooltip {
-			font-family: sans-serif;
-			font-size: 13px;
+			font-family: Roboto, sans-serif;
+			font-size: 16px;
+			font-weight: 300;
 			transition: opacity 200ms;
 			opacity: 0;
 		}
@@ -159,67 +182,81 @@
 			display: block;
 		}
 		
+		#urlButton {
+			color: #c86e6f;
+
+			/* display as link instead of button: https://stackoverflow.com/questions/1367409/how-to-make-button-look-like-a-link */
+			background:none!important;
+			 _color:inherit;
+			 border:none; 
+			 _padding:0!important;
+			 font: inherit;
+			 /*border is optional*/
+			 _border-bottom:1px solid #444; 
+			 cursor: pointer;
+		}
+		
 		</style>
 		
 		<div id="questiontable">
 			<h3 id="category1" class="questioncategory">Finanzielle Leistungsfähigkeit</h3>
 			<div>
 			<div class="questiontext">Wie hoch ist der Selbstfinanzierungsanteil in Ihrer Gemeinde gemäss Statistik der laufenden Gemeinderechnung?</div><br>
-			<input class="fcinput" id="input1" type="text" size="3"/> %
+			<input class="fcinput" id="input1" type="text" size="3"/> <span> %</span>
 			</div>
 			
 			<h3 id="category2" class="questioncategory">Professionalität</h3>
 			<div>
 			<div class="questiontext">Wie viele Stunden pro Woche ist der Schalter des Gemeindehauses geöffnet? (Zählen Sie die Stunden vor 08:00 Uhr, zwischen 12:00 und 14:00 und diejenigen nach 17:00 Uhr doppelt.)</div><br>
-			<input class="fcinput" id="input2" type="text" size="3"/> h
+			<input class="fcinput" id="input2" type="text" size="3"/> <span> h</span>
 			</div>
 			
 			<h3 id="category3" class="questioncategory">Aussenwirkung</h3>
 			<div>
 			<div class="questiontext">Wie gross ist der Einfluss Ihrer Gemeinde auf die kantonale Politik? (0 = kein Einfluss bis 4 = grosser Einfluss)</div><br>
-			<input class="fcinput" id="input3" type="text" size="3"/>  Pkte
+			<input class="fcinput" id="input3" type="text" size="3"/> <span> Pkte</span>
 			</div>
 			
 			<h3 id="category4" class="questioncategory">Standortattraktivität</h3>
 			<div>
 			<div class="questiontext">Wie hoch sind die jährlichen Steuererträge der natürlichen Personen pro Einwohner?</div><br>
-			<input class="fcinput" id="input4" type="text" size="3"/> CHF
+			<input class="fcinput" id="input4" type="text" size="3"/> <span> CHF</span>
 			</div>
 			
 			<h3 id="category5" class="questioncategory">Mitwirkungsrechte</h3>
 			<div>
 			<div class="questiontext">Wie hoch ist der Anteil an Stimmberechtigten, die für die Einreichung einer Initiative benötigt sind (Quorum)?</div><br>
-			<input class="fcinput" id="input5" type="text" size="3"/> %
+			<input class="fcinput" id="input5" type="text" size="3"/> <span> %</span>
 			</div>
 			
 			<h3 id="category6" class="questioncategory">Partizipation</h3>
 			<div>
 			<div class="questiontext">Wie hoch ist die durchschnittliche Stimmbeteiligung für kommunale Angelegenheiten?</div><br>
-			<input class="fcinput" id="input6" type="text" size="3"/> %
+			<input class="fcinput" id="input6" type="text" size="3"/> <span> %</span>
 			</div>
 			
 			<h3 id="category7" class="questioncategory">Filz / "Vetterliwirtschaft"</h3>
 			<div>
 			<div class="questiontext">Wie viele Offerten haben Sie im Durchschnitt pro Submissionsverfahren eingeholt?</div><br>
-			<input class="fcinput" id="input7" type="text" size="3"/> Off.
+			<input class="fcinput" id="input7" type="text" size="3"/> <span> Off.</span>
 			</div>
 			
 			<h3 id="category8" class="questioncategory">Bürgernähe</h3>
 			<div>
 			<div class="questiontext">Wie hoch ist der Anteil der angenommenen Vorlagen des Gemeindevorstandes (an Gemeindeversammlung und/oder Urnengemeinde)?</div><br>
-			<input class="fcinput" id="input8" type="text" size="3"/> %
+			<input class="fcinput" id="input8" type="text" size="3"/> <span> %</span>
 			</div>
 			
 			<h3 id="category9" class="questioncategory">Soziale Integration</h3>
 			<div>
 			<div class="questiontext">Wie viele  Gesuche zur Durchführung einer Veranstaltung von Vereinen wurden im letzten ganzen Jahr eingereicht?</div><br>
-			<input class="fcinput" id="input9" type="text" size="3"/> Ges.
+			<input class="fcinput" id="input9" type="text" size="3"/> <span> Ges.</span>
 			</div>
 			
 			<h3 id="category10" class="questioncategory">Identifikation mit Gemeinde</h3>
 			<div>
 			<div class="questiontext">Wie hoch ist der Anteil an Wochenaufenthaltern in Ihrer Gemeinde? (Anzahl Wochenaufenthalter / ständige Wohnbevölkerung (STATPOP))</div><br>
-			<input class="fcinput" id="input10" type="text" size="3"/> %
+			<input class="fcinput" id="input10" type="text" size="3"/><span> %</span>
 			</div>
 		</div>
 	
@@ -408,9 +445,9 @@ function load_FusionscheckKurzvariante() {
 	
 	function getColor(i) {
 		if (i==0){
-			return 'hsl(204,100%,34%)';
+			return '#c86e6f';
 		} else {
-			return 'hsl(0,60%,50%)';
+			return '#4b92a4';
 		}
 	}
 	
@@ -469,8 +506,10 @@ function load_FusionscheckKurzvariante() {
 		.attr("class", "title")
 		.attr('transform', 'translate(-400,0)') 
 		.attr("x", w - 70)
-		.attr("y", 10)
-		.attr("font-size", "12px")
+		.attr("y", 15)
+		.attr("font-size", "16px")
+		.attr("font-family", "Roboto")
+		.attr("font-weight", "300")
 		.attr("fill", "#404040")
 		.text("Legende");
 			
@@ -479,16 +518,18 @@ function load_FusionscheckKurzvariante() {
 		.attr("class", "legend")
 		.attr("height", 100)
 		.attr("width", 200)
-		.attr('transform', 'translate(-400,20)') 
+		.attr('transform', 'translate(-400,30)') 
 		;
-		
+	
+	var lineHeight = 22;
+	
 	//Create colour squares
 	legend.selectAll('rect')
 		.data(LegendOptions)
 		.enter()
 		.append("rect")
 		.attr("x", w - 65)
-		.attr("y", function(d, i){ return i * 20;})
+		.attr("y", function(d, i){ return i * lineHeight - 2;})
 		.attr("width", 10)
 		.attr("height", 10)
 		.style("fill", function(d, i){ return getColor(i);})
@@ -500,8 +541,10 @@ function load_FusionscheckKurzvariante() {
 		.enter()
 		.append("text")
 		.attr("x", w - 52)
-		.attr("y", function(d, i){ return i * 20 + 9;})
-		.attr("font-size", "11px")
+		.attr("y", function(d, i){ return i * lineHeight + 9;})
+		.attr("font-size", "16px")
+		.attr("font-family", "Roboto")
+		.attr("font-weight", "300")
 		.attr("fill", "#737373")
 		.text(function(d) { return d; })
 		;
@@ -620,7 +663,11 @@ function load_FusionscheckKurzvariante() {
 				ui.newContent.find("input").focus();
 			}
 		});
-
+		
+		$("#urlButton").click(function() {
+			generateURLWithQuestionValues();
+			sendForm();
+		});
 }
 
 window.onload = function () {
@@ -631,7 +678,7 @@ window.onload = function () {
 	</script>
 
 	<div id="url">
-    <button disabled="disabled" onClick="generateURLWithQuestionValues(); sendForm();" id="urlButton">Generiere Link</button>
+    <button disabled="disabled" id="urlButton">Generiere Link</button>
     <input id="urlInput" type="text" size="50"></input>
   </div>
  <!-- cut here ✂ ------------------------- -->
